@@ -1,0 +1,60 @@
+-- ============================================================
+-- MIGRACIÓN 072: Bitácora docente — impedir fecha futura
+--
+-- HALLAZGO:
+--   El formulario de bitácora (bit-fecha, en bitacora.js) no tenía
+--   ningún límite superior de fecha. Se confirmó con datos reales de
+--   Buena Fe / Juan David: se guardó un registro con fecha 2026-08-02
+--   (un día adelantado respecto al día real, 2026-08-01), con toast de
+--   éxito -- no fue un falso positivo, la fila quedó guardada de
+--   verdad. El registro no aparecía ni en "Mi historial" del profesor
+--   ni en "Historial del colegio" del director porque ambos filtros
+--   traen "Hasta = hoy" por defecto, ocultándolo sin ningún aviso.
+--   La bitácora es un registro del día, no tiene sentido que admita
+--   fechas posteriores a hoy.
+--
+-- SOLUCIÓN (segunda capa, la primera ya aplicada en bitacora.js):
+--   Restricción CHECK a nivel de base de datos que rechaza cualquier
+--   fila con fecha posterior al día actual -- mismo patrón usado en
+--   todo el proyecto (no confiar solo en la validación del frontend).
+--   Complementa el "max" agregado al input de fecha y la validación
+--   en _guardarRegistro() antes del upsert.
+--
+-- PRE-CONDICIÓN VERIFICADA ANTES DE APLICAR:
+--   Los registros de prueba con fecha futura (incluida la fila
+--   2026-08-02 de la prueba de JD) se identificaron y se
+--   eliminaron manualmente antes de esta migración -- de no hacerlo,
+--   el ADD CONSTRAINT falla porque una fila existente lo viola.
+--   Confirmar con esta consulta que no queda ninguna antes de
+--   aplicar:
+--     SELECT id, colegio_id, profesor_id, fecha
+--     FROM public.bitacora_docente
+--     WHERE fecha > CURRENT_DATE;
+--   Debe devolver 0 filas.
+--
+-- ALCANCE:
+--   No cambia el comportamiento con fechas pasadas -- un profesor
+--   sigue pudiendo cargar un día anterior que se le haya pasado,
+--   exactamente igual que hoy. Solo bloquea fechas futuras.
+--   No toca RLS, no toca ninguna otra tabla ni política.
+-- ============================================================
+
+ALTER TABLE public.bitacora_docente
+  ADD CONSTRAINT bitacora_docente_fecha_no_futura
+  CHECK (fecha <= CURRENT_DATE);
+
+-- ─────────────────────────────────────────────────────────
+-- Verificación post-migración:
+--
+-- 1. select conname from pg_constraint
+--    where conrelid = 'public.bitacora_docente'::regclass
+--      and conname = 'bitacora_docente_fecha_no_futura';
+--    -> debe existir.
+--
+-- 2. Intentar insertar una fila con fecha = CURRENT_DATE + 1
+--    (vía API directa, sin pasar por el frontend) -> debe fallar
+--    con violación de CHECK constraint.
+--
+-- 3. Insertar/editar una fila con fecha pasada -> debe seguir
+--    funcionando igual que antes de esta migración.
+-- ─────────────────────────────────────────────────────────

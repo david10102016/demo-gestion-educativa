@@ -1,0 +1,135 @@
+﻿2026-10-18 modoOscuroThemesCss
+2026-10-18 comunicadosDirectorMejorado
+2026-10-17 comunicadosMejoradoUI
+2026-10-17 vistaActividadModalCompleto
+2026-10-17 nuievaedgeFunctionEnSupabase
+2026-10-16 asesorCursoConsolidado
+2026-10-15 asesorCurso
+2026-10-09 resetProfesor
+2026-10-08 profesoresMasivoFront
+2026-10-08 actualizacionSWjs
+2026-10-08 implementacionExcelImport-ProfesoraMasivo
+2026-09-30 informeTecnico
+2026-09-29 078sql
+2026-09-29 actualizacion-dominio-por-colegio-ejemplo-japeducativa.com
+2026-09-29 implementacionEnElDIRECTOR-asitenciasNovedades
+2026-09-28 cssGlobal-profesor-director-exportexcel-actualizacionVistaAsistenciaEnPROFESOR
+2026-09-14 ActualizadoLibretaEstudianteExportRapido-NotaInicioEstadoEnCursoEn elEstudiante
+2026-09-10 vistaCarrerasTecnicasPorEspecialidadYcursos
+2026-09-09 rubricaYcriterioEnElPanelDelEstudianteAlCrear
+2026-09-09 certifocadoDeexcelencia
+2026-09-08 actualizacionToastAlcargarExcel-listaDeestudiantesActualizar en el card
+2026-09-07 revertido
+2026-09-07 index-logincolorPrimario-porColegios
+2026-09-06 reversionDELbotonEliminarYlaMigracion099ex77
+2026-09-05 rpc-eliminarProfesorSin Datos
+2026-09-04 correoProf
+2026-09-02 Actualizo calificaciones y exportaci├│n a Excel
+2026-08-27 Actualizaci├│n del proyecto
+2026-08-27 Actualizaci├│n del proyecto
+2026-08-18 first commit
+2026-08-17 mejoras-subirtareasTXT
+2026-08-15 ModalesTomanElValorDelColorPrimarioDinamico
+2026-08-12 modalComunicados
+2026-08-12 bugEliminadoDeLosPaneles
+2026-08-12 Modal-RegistarNotas-Rubrica-herdedarColorPrimary
+2026-08-11 modalCrearActividadesPrimary
+2026-08-10 sidebarfCompeltoEnMovilHorizontal
+2026-08-09 cardsDinamicosProfesor
+2026-08-09 ImplementacionRubricas-svgColoridosPanelProfesor-migracion074
+2026-08-04 Xss-solucionCompletaEn20ArchivosJS-Frontend
+2026-08-03 Finanzas/pagos-controlTotalSuperAdmin
+2026-08-02 badgeCorreosencadaPanel
+2026-08-02 BitacoraImpresionConDise├▒o
+2026-08-01 implememtacionFinal-pesta├▒aBitacora
+2026-07-31 juntaTrimestral-migracion069
+2026-07-31 profesorJS-contraCorreoLogueadoenCampodeasistencia
+2026-07-31 Actualizaci├│nJS-migraciones
+2026-07-26 Actualizaci├│nAAvanzada-hastaMigracion064-y-otros
+2026-07-20 migration052-multitenant
+2026-07-17 profesorJs-informeTecnico
+2026-07-17 ProfesorJS-CalifDirectaSer-Auto
+2026-07-17 panelProfesor-InformeJntaTrimestral-BajoRendimiento-AprobadosReprobados
+2026-07-17 migracion051FixEntregarTareasCarrerasTecnicas-estudiantesJs
+2026-07-17 directorJs-PromedioAnual-migracion050
+2026-07-17 globalCSS-ReportesDirector-PromedioAnual-VistaCalificaciones
+2026-07-16 readme.Md-estudiantesJS
+2026-07-16 dashboardPrfesor-js
+2026-07-15 cssGlobal
+2026-07-15 carrerasTecnicas-migracionesSql
+2026-07-14 vistaCalificaciones
+2026-07-14 Actualizaci├│n-md
+2026-07-14 carrerasTecnicas-migracion
+2026-07-13 Actualizaci├│n-varios-migraciones
+2026-07-13 Actualizaci├│n-migraciones-informeMd-y-otros
+2026-07-12 Actualizaci├│n de tutores y migraciones
+2026-07-11 actualizacionEdgeFunctions-migrations-panelSecretaria-PanelTutorPadre
+2026-07-10 informeTec-migracion028
+2026-07-09 varias-migracioes-sql
+2026-07-07 actualizacionDEvariosArchivos
+2026-07-06 sw-js
+2026-07-06 indexHtml-serviceWorker-aplication
+2026-07-06 indexHtml-serviceWorkerHabilitadoDescomentado
+2026-07-06 sw-js
+2026-07-06 auhtJS-dataLayerJS
+2026-07-06 authJS
+2026-07-06 atualizacion-profesorJS-vistaCalificacionesJs-bajoRendimientoJS-juntatrimestralJs-Archivonuevos-ConnectionStatusJS-DataLayerJs-offlineDBJS
+2026-07-05 director-Js-vistaCalificaciones-Js
+2026-07-02 actualizacion-profesorJs
+2026-07-01 trigger deploy
+2026-07-01 fix: service worker network-first para evitar cach├® desincronizado
+2026-06-30 actualizaciones
+2026-06-28 mejorasIndexLogin
+2026-06-28 index-ingresaLogin
+2026-06-25 mejoras
+2026-06-21 migracion017-estudianteJS
+2026-06-21 auth-js
+2026-06-20 migracionSQL-RLSestudiantes
+2026-06-19 estudiante-js
+2026-06-15 js-profesor
+2026-06-14 js-director-reposrtes-vistaCal-promAnual
+2026-06-13 variosCambiosIncluidoMigraciones-sql
+2026-06-05 actualizacionVarios-multitenant
+2026-06-05 modificacionVariosArchivos-NuevoCreadoModuloPagos
+2026-05-26 informeReadme-cloudinary
+2026-05-26 iconossesalendelaTarjeta-vistaCalificaciones.js
+2026-05-26 entregaTareas-cloudinary
+2026-05-26 DashDirector-AdminDirectorJs-CredencialesPdf.js
+2026-05-25 chore: eliminar proyecto-antiguo y limpiar archivos obsoletos
+2026-05-23 correcionpararacargarsininternet
+2026-05-23 sw-js-enPublic
+2026-05-22 add icons
+2026-05-21 remove dist from git
+2026-05-21 actualizacionCompleta
+2026-05-21 index
+2026-05-20 actualizacion
+2026-05-19 actualizaciongeneral-indexmoderno
+2026-05-19 indexmoderno
+2026-05-19 mejoras indexaBF
+2026-05-18 actualizacion dashboards y modulos
+2026-05-16 edge-resetpassworden-vscode-informetecnico-md
+2026-05-16 certificadook
+2026-05-16 informe-junta-trimestral-certificadomoderno
+2026-05-16 junta-trimestral
+2026-05-16 14 archivos modificado y nuevos
+2026-05-14 director-configapp-cierre
+2026-05-13 director-js-definitivo
+2026-05-13 director-js-corregidook
+2026-05-13 director-js-corregido
+2026-05-13 director-js
+2026-05-13 estudiante-js
+2026-05-13 directorjs-estudiantejs
+2026-05-13 globalcss
+2026-05-13 estudiante-js
+2026-05-13 panelestudiante-yjs
+2026-05-13 director-js
+2026-05-13 global-theme
+2026-05-13 theme-director-estudiante-profesor-actualizacion
+2026-05-13 director-html
+2026-05-13 theme-director-estudiante-profesor
+2026-05-12 index
+2026-05-12 readme-desplegar-vercel
+2026-05-12 viteconfig
+2026-05-12 correcion
+2026-05-12 css
+2026-05-12 first commit

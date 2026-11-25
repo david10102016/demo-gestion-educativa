@@ -1,0 +1,101 @@
+-- ─────────────────────────────────────────────────────────
+-- 037 — Endurecimiento de RLS en notas (documentación de
+-- estado ya aplicado en producción)
+--
+-- Nota importante: este script se generó y ejecutó en vivo
+-- durante la auditoría, pero al verificar con pg_policies
+-- ANTES de correrlo, se confirmó que las 5 políticas ya
+-- estaban aplicadas en producción con esta misma definición
+-- exacta. El DROP + CREATE fue una operación neutra
+-- (recrea lo idéntico) — no modificó comportamiento, no
+-- rompió nada. Se documenta acá solo para sincronizar la
+-- carpeta local de migraciones con el estado real de la base.
+--
+-- Contenido:
+-- 1) notas_insert_profesor / notas_update_profesor: exige
+--    que el estudiante calificado pertenezca al curso de la
+--    actividad (e.curso_id = a.curso_id), no solo que el
+--    profesor esté asignado a esa materia/curso en general.
+--    Mismo criterio que el fix de rpc_upsert_nota.
+-- 2) bloquear_notas_insert / bloquear_notas_update /
+--    bloquear_notas_delete: declaradas AS RESTRICTIVE, para
+--    que el bloqueo por gestión cerrada (config_gestion.
+--    bloqueada = true) no pueda saltarse combinándose por OR
+--    con otra política permissive.
+--
+-- Verificación: probado con ataque real (profesor de Buena Fe
+-- contra estudiante de otro colegio) → 403/42501, bloqueado
+-- correctamente. Aislamiento multitenant y RLS confirmados
+-- intactos.
+-- ─────────────────────────────────────────────────────────
+
+DROP POLICY IF EXISTS "notas_insert_profesor" ON public.notas;
+CREATE POLICY "notas_insert_profesor"
+ON public.notas FOR INSERT
+WITH CHECK (
+  EXISTS (
+    SELECT 1 FROM public.asignaciones_profesor ap
+    JOIN public.actividades a ON a.id = notas.actividad_id
+    JOIN public.estudiantes e ON e.curso_id = a.curso_id
+    WHERE ap.profesor_id = auth.uid()
+      AND ap.curso_id = a.curso_id
+      AND ap.materia_id = a.materia_id
+      AND ap.activo = true
+      AND e.id = notas.estudiante_id
+  )
+);
+
+DROP POLICY IF EXISTS "notas_update_profesor" ON public.notas;
+CREATE POLICY "notas_update_profesor"
+ON public.notas FOR UPDATE
+USING (
+  EXISTS (
+    SELECT 1 FROM public.asignaciones_profesor ap
+    JOIN public.actividades a ON a.id = notas.actividad_id
+    JOIN public.estudiantes e ON e.curso_id = a.curso_id
+    WHERE ap.profesor_id = auth.uid()
+      AND ap.curso_id = a.curso_id
+      AND ap.materia_id = a.materia_id
+      AND ap.activo = true
+      AND e.id = notas.estudiante_id
+  )
+);
+
+DROP POLICY IF EXISTS "bloquear_notas_insert" ON public.notas;
+CREATE POLICY "bloquear_notas_insert" ON public.notas
+AS RESTRICTIVE
+FOR INSERT
+WITH CHECK (
+  NOT EXISTS (
+    SELECT 1 FROM public.config_gestion cg
+    JOIN public.actividades a ON a.id = notas.actividad_id
+    WHERE cg.año = EXTRACT(year FROM a.fecha_limite)::integer
+      AND cg.bloqueada = true
+  )
+);
+
+DROP POLICY IF EXISTS "bloquear_notas_update" ON public.notas;
+CREATE POLICY "bloquear_notas_update" ON public.notas
+AS RESTRICTIVE
+FOR UPDATE
+USING (
+  NOT EXISTS (
+    SELECT 1 FROM public.config_gestion cg
+    JOIN public.actividades a ON a.id = notas.actividad_id
+    WHERE cg.año = EXTRACT(year FROM a.fecha_limite)::integer
+      AND cg.bloqueada = true
+  )
+);
+
+DROP POLICY IF EXISTS "bloquear_notas_delete" ON public.notas;
+CREATE POLICY "bloquear_notas_delete" ON public.notas
+AS RESTRICTIVE
+FOR DELETE
+USING (
+  NOT EXISTS (
+    SELECT 1 FROM public.config_gestion cg
+    JOIN public.actividades a ON a.id = notas.actividad_id
+    WHERE cg.año = EXTRACT(year FROM a.fecha_limite)::integer
+      AND cg.bloqueada = true
+  )
+);

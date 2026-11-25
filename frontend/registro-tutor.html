@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Tutor — Gestión Educativa</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/theme-colors.css">
+  <style>
+    .registro-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: var(--color-bg);
+    }
+    .registro-shell {
+      width: 100%;
+      max-width: 420px;
+    }
+    .btn-volver-registro {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--font-size-sm, 14px);
+      font-weight: 600;
+      color: var(--color-text-2);
+      margin-bottom: 14px;
+      padding: 6px 2px;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .btn-volver-registro:hover { color: var(--color-primary); }
+    .registro-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl, 20px);
+      padding: 36px 32px;
+      width: 100%;
+      box-shadow: var(--shadow-lg, 0 16px 32px -8px rgb(15 23 42 / 0.16));
+    }
+    .registro-logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .registro-logo-title {
+      font-size: var(--font-size-xl, 1.3rem);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+    .registro-logo-sub {
+      font-size: var(--font-size-sm, 0.875rem);
+      color: var(--color-text-2);
+    }
+    .registro-colegio-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+      border: 1px solid color-mix(in srgb, var(--color-primary) 22%, var(--color-border));
+      border-radius: var(--radius-md, 10px);
+      padding: 10px 14px;
+      margin-bottom: 24px;
+      font-size: var(--font-size-sm, 0.875rem);
+      font-weight: 600;
+      color: var(--color-primary-dark, var(--color-primary));
+      text-align: center;
+    }
+    .registro-colegio-badge svg { flex-shrink: 0; color: var(--color-primary); }
+    .paso-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .paso-dot {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+    }
+    .paso-dot.activo   { background: var(--color-primary); color: #fff; box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 18%, transparent); }
+    .paso-dot.completo { background: var(--color-success, #10b981); color: #fff; }
+    .paso-dot.inactivo { background: var(--color-border); color: var(--color-text-2); }
+    .paso-linea {
+      flex: 1;
+      height: 3px;
+      background: var(--color-border);
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .paso-linea.completo { background: var(--color-success, #10b981); }
+    .paso-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-text-2);
+      text-align: center;
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .form-step { display: none; }
+    .form-step.activo { display: block; }
+    .btn-full { width: 100%; justify-content: center; }
+    .registro-card .btn-primary,
+    .registro-card .btn-secondary {
+      font-weight: 600;
+      padding: 11px var(--space-4, 16px);
+    }
+    .registro-card label {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .registro-card input[type="text"],
+    .registro-card input[type="email"],
+    .registro-card input[type="tel"],
+    .registro-card input[type="password"] {
+      padding: 11px 14px;
+      border: 1.5px solid var(--color-border-strong, var(--color-border));
+      font-size: var(--font-size-base, 15px);
+    }
+    .registro-card input.error {
+    border-color: var(--color-error) !important;
+}
+    .registro-card input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+    }
+    .password-wrapper {
+      position: relative;
+    }
+    .password-wrapper input {
+      padding-right: 44px;
+    }
+    .btn-toggle-pass {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-2);
+      font-size: 1rem;
+      padding: 4px;
+    }
+    .requisito {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--color-text-2);
+      margin-top: 6px;
+      transition: color 0.15s;
+    }
+    .requisito.ok { color: var(--color-success, #10b981); font-weight: 600; }
+    .exito-state {
+      text-align: center;
+      padding: 20px 0;
+      display: none;
+    }
+    .exito-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+    .registro-link a { color: var(--color-primary); }
+  </style>
+</head>
+<body>
+
+<div class="registro-wrapper">
+  <div class="registro-shell">
+    <a href="/index.html?volver=login" class="btn-volver-registro" id="btn-volver-registro">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Volver
+    </a>
+    <div class="registro-card">
+
+      <div class="registro-logo">
+        <div class="registro-logo-title">Gestión Educativa</div>
+        <div class="registro-logo-sub">Registro de padre / tutor</div>
+      </div>
+
+      <div class="registro-colegio-badge" id="registro-colegio-badge" style="display:none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span id="registro-colegio-nombre"></span>
+      </div>
+
+    <!-- Indicador de pasos -->
+    <div style="margin-bottom:24px;">
+      <div class="paso-indicator">
+        <div class="paso-dot activo" id="dot-1">1</div>
+        <div class="paso-linea" id="linea-1"></div>
+        <div class="paso-dot inactivo" id="dot-2">2</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span class="paso-label">Tus datos</span>
+        <span class="paso-label">Contraseña</span>
+      </div>
+    </div>
+
+    <!-- PASO 1: Datos personales -->
+    <div class="form-step activo" id="step-1">
+      <div class="form-group">
+        <label>Nombre completo *</label>
+        <input type="text" id="reg-nombre" placeholder="Ej: David Ramos Pérez" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico *</label>
+        <input type="email" id="reg-email" placeholder="tucorreo@ejemplo.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Teléfono (opcional)</label>
+        <input type="tel" id="reg-telefono" placeholder="Ej: 76543210">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="irPaso2()">
+        Continuar
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-left:6px;">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+      <p style="text-align:center;margin-top:16px;font-size:0.875rem;color:var(--color-text-2);">
+        ¿Ya tienes cuenta?
+        <a href="/index.html?volver=login" style="color:var(--color-primary);font-weight:600;">Inicia sesión</a>
+      </p>
+    </div>
+
+    <!-- PASO 2: Contraseña -->
+    <div class="form-step" id="step-2">
+      <div class="form-group">
+        <label>Contraseña *</label>
+        <div class="password-wrapper">
+          <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres"
+                 oninput="validarPassword()" autocomplete="new-password">
+          <button class="btn-toggle-pass" type="button" onclick="togglePass('reg-password', this)">👁</button>
+        </div>
+        <div id="req-longitud" class="requisito">
+          <span>○</span> Mínimo 6 caracteres
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirmar contraseña *</label>
+        <div class="password-wrapper">
+          <input type="password" id="reg-password2" placeholder="Repite tu contraseña"
+                 oninput="validarPassword()" autocomplete="new-password">
+          <button class="btn-toggle-pass" type="button" onclick="togglePass('reg-password2', this)">👁</button>
+        </div>
+        <div id="req-coincide" class="requisito">
+          <span>○</span> Las contraseñas coinciden
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:8px;">
+        <button class="btn btn-secondary" onclick="irPaso1()" style="flex:1;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right:6px;">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          Volver
+        </button>
+        <button class="btn btn-primary" onclick="registrar()" style="flex:2;" id="btn-registrar">
+          Crear cuenta
+        </button>
+      </div>
+    </div>
+
+    <!-- ESTADO: Éxito -->
+    <div class="exito-state" id="exito-state">
+      <div class="exito-icon">🎉</div>
+      <h3 style="margin:0 0 8px;font-size:1.1rem;font-weight:700;color:var(--color-text);">
+        ¡Cuenta creada!
+      </h3>
+      <p style="color:var(--color-text-2);font-size:0.875rem;margin-bottom:24px;">
+        Tu cuenta fue creada correctamente. Ya puedes ingresar y vincular a tus hijos.
+      </p>
+      <a href="/dashboard-tutor.html" class="btn btn-primary btn-full">
+        Ir a mi panel
+      </a>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase }           from '/js/config/supabase-config.js'
+import { toast, mostrarLoader, ocultarLoader } from '/js/utils/ui.js'
+import { registrarTutorDesdeWeb } from '/js/pagos/pagos.js'
+import { validarNombre, validarTelefono, validarEmail } from '/js/utils/validaciones.js'
+
+// ── Aplicar colores del colegio guardados en localStorage (mismo
+// mecanismo que index.html, profesor.js y estudiante.js) ──
+const colorPrimario = localStorage.getItem('color_primario')
+const colorSecundario = localStorage.getItem('color_secundario')
+if (colorPrimario) {
+  document.documentElement.style.setProperty('--color-primary', colorPrimario)
+}
+if (colorSecundario) {
+  document.documentElement.style.setProperty('--color-secondary', colorSecundario)
+}
+
+// ── Mostrar nombre del colegio guardado (seleccionado en index.html) ──
+const nombreColegioGuardado = localStorage.getItem('colegio_nombre')
+if (nombreColegioGuardado) {
+  document.getElementById('registro-colegio-nombre').textContent = nombreColegioGuardado
+  document.getElementById('registro-colegio-badge').style.display = 'flex'
+}
+
+// ── Si ya está logueado redirigir ──
+const { data: { session } } = await supabase.auth.getSession()
+if (session) window.location.href = '/dashboard-tutor.html'
+
+// ── Paso 1 → 2 ──
+window.irPaso2 = function() {
+  const nombre   = document.getElementById('reg-nombre').value.trim()
+  const email    = document.getElementById('reg-email').value.trim()
+  const telefono = document.getElementById('reg-telefono').value.trim()
+
+  const resNombre = validarNombre(nombre)
+  if (!resNombre.valido) { toast(resNombre.mensaje, 'warning'); return }
+  const resEmail = validarEmail(email)
+  if (!resEmail.valido) { toast(resEmail.mensaje, 'warning'); return }
+  const resTelefono = validarTelefono(telefono, { requerido: false })
+  if (!resTelefono.valido) { toast(resTelefono.mensaje, 'warning'); return }
+
+  document.getElementById('step-1').classList.remove('activo')
+  document.getElementById('step-2').classList.add('activo')
+  document.getElementById('dot-1').className  = 'paso-dot completo'
+  document.getElementById('dot-1').textContent = '✓'
+  document.getElementById('dot-2').className  = 'paso-dot activo'
+  document.getElementById('linea-1').classList.add('completo')
+}
+
+window.irPaso1 = function() {
+  document.getElementById('step-2').classList.remove('activo')
+  document.getElementById('step-1').classList.add('activo')
+  document.getElementById('dot-1').className  = 'paso-dot activo'
+  document.getElementById('dot-1').textContent = '1'
+  document.getElementById('dot-2').className  = 'paso-dot inactivo'
+  document.getElementById('linea-1').classList.remove('completo')
+}
+
+// ── Validación visual en vivo (nombre y teléfono) ──
+const inputNombre   = document.getElementById('reg-nombre')
+const inputTelefono = document.getElementById('reg-telefono')
+
+inputNombre.addEventListener('input', function() {
+  const v = this.value.trim()
+  const soloCaracteresValidos = !v || /^[A-Za-zÁÉÍÓÚÑÜáéíóúñü'’\-\s]*$/.test(v)
+  this.classList.toggle('error', !soloCaracteresValidos)
+})
+
+inputNombre.addEventListener('blur', function() {
+  const res = validarNombre(this.value.trim())
+  this.classList.toggle('error', !res.valido)
+})
+
+inputTelefono.addEventListener('blur', function() {
+  const res = validarTelefono(this.value.trim(), { requerido: false })
+  this.classList.toggle('error', !res.valido)
+})
+
+// ── Validar contraseña en tiempo real ──
+window.validarPassword = function() {
+  const pass  = document.getElementById('reg-password').value
+  const pass2 = document.getElementById('reg-password2').value
+
+  const reqLong    = document.getElementById('req-longitud')
+  const reqCoincide = document.getElementById('req-coincide')
+
+  if (pass.length >= 6) {
+    reqLong.className = 'requisito ok'
+    reqLong.innerHTML = '<span>✓</span> Mínimo 6 caracteres'
+  } else {
+    reqLong.className = 'requisito'
+    reqLong.innerHTML = '<span>○</span> Mínimo 6 caracteres'
+  }
+
+  if (pass && pass2 && pass === pass2) {
+    reqCoincide.className = 'requisito ok'
+    reqCoincide.innerHTML = '<span>✓</span> Las contraseñas coinciden'
+  } else {
+    reqCoincide.className = 'requisito'
+    reqCoincide.innerHTML = '<span>○</span> Las contraseñas coinciden'
+  }
+}
+
+// ── Toggle mostrar/ocultar contraseña ──
+window.togglePass = function(inputId, btn) {
+  const input = document.getElementById(inputId)
+  if (input.type === 'password') {
+    input.type = 'text'
+    btn.textContent = '🙈'
+  } else {
+    input.type = 'password'
+    btn.textContent = '👁'
+  }
+}
+
+// ── Registrar ──
+window.registrar = async function() {
+  const nombre   = document.getElementById('reg-nombre').value.trim()
+  const email    = document.getElementById('reg-email').value.trim()
+  const telefono = document.getElementById('reg-telefono').value.trim()
+  const password = document.getElementById('reg-password').value
+  const password2 = document.getElementById('reg-password2').value
+
+  const resTelefono = validarTelefono(telefono, { requerido: false })
+  if (!resTelefono.valido) { toast(resTelefono.mensaje, 'warning'); return }
+
+  if (password.length < 6) {
+    toast('La contraseña debe tener al menos 6 caracteres', 'warning'); return
+  }
+  if (password !== password2) {
+    toast('Las contraseñas no coinciden', 'warning'); return
+  }
+
+  const btn = document.getElementById('btn-registrar')
+  btn.disabled = true
+
+  mostrarLoader('Creando tu cuenta...')
+  try {
+    await registrarTutorDesdeWeb({ nombre_completo: nombre, email, password, telefono: resTelefono.limpio })
+
+    // Ocultar pasos y mostrar éxito
+    document.getElementById('step-2').classList.remove('activo')
+    document.getElementById('exito-state').style.display = 'block'
+
+  } catch(e) {
+    const msg = e.message?.includes('already registered')
+      ? 'Este correo ya está registrado. Intenta iniciar sesión.'
+      : e.message ?? 'Error al crear la cuenta'
+    toast(msg, 'error')
+    btn.disabled = false
+  } finally {
+    ocultarLoader()
+  }
+}
+</script>
+
+<script>
+(function() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark')
+  }
+})()
+</script>
+</body>
+</html>

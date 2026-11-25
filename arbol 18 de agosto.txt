@@ -1,0 +1,185 @@
+﻿├── backend
+│   ├── migrations
+│   │   ├── 001_schema.sql
+│   │   ├── 002_configuraciones.sql
+│   │   ├── 003_rls.sql
+│   │   ├── 0035-
+│   │   ├── 004_funciones.sql
+│   │   ├── 005_datos_iniciales.sql
+│   │   ├── 006_multitenant_rls.sql
+│   │   ├── 007_fix_notas_calificaciones_profesor.sql
+│   │   ├── 008_MIGRACIÓN FIX RLS USUARIOS.sql
+│   │   ├── 009_superadmin+fixcursos_materias.sql
+│   │   ├── 010 — VistaNotasFinales-Reportes.sql
+│   │   ├── 011-config-funcionalpara+colegios.sql
+│   │   ├── 012-notasFinalesVista-notasAisladasPorColegios.sql
+│   │   ├── 013-rpc copiar config colegio base.sql
+│   │   ├── 014-rpc_crear_director.sql
+│   │   ├── 015_proteccion_duplicados_cursos-configuracion_colegio.sql
+│   │   ├── 016-Activar-RLS-estudiantes.sql
+│   │   ├── 017-NotasNull-panelEstudiante.sql
+│   │   ├── 018-Modulo-comunicados.sql
+│   │   ├── 019 — RLS tutor_estudiante multitenant.sql
+│   │   ├── 020-seguridad-vinculacion-tutor.sql
+│   │   ├── 021-rol-tutor-en-comunicados-y-usuarios.sql
+│   │   ├── 022-fix-aislamiento-colegio.sql
+│   │   ├── 023-seguridad-rpc-funciones-publicas.sql
+│   │   ├── 024-seguridad-fichas-seguimiento-ser.sql
+│   │   ├── 025-cierra-INSERT-directoAtutor-estudiante.sql
+│   │   ├── 026 — Restringe el UPDATE-de-marcado-como-leído.sql
+│   │   ├── 027 — Bloquea-con-un-trigger-Comunicado.sql
+│   │   ├── 028-proteger-colegio-tutor.sql
+│   │   ├── 029-bloquea-escalamiento-de-rol-en-registro.sql
+│   │   ├── 030-pagos-efectivo-sin-tutor.sql
+│   │   ├── 031-cierre-colegio-de-estudiante-anon.sql
+│   │   ├── 032-cierra-el-privilegio.sql
+│   │   ├── 033-limite-dos-tutores-por-estudiante.sql
+│   │   ├── 034-fix-rpc-upsert-calificacion-curso.sql
+│   │   ├── 036-fix-aislamiento-config-ser.sql
+│   │   ├── 037-Endurecimeinto-RLS-notas
+│   │   ├── 038-select-asignaciones-profesor-estudiante.sql
+│   │   ├── 039-cierra-aislamiento-respuestas-evaluacion.sql
+│   │   ├── 040-rpc_delete_nota.sql
+│   │   ├── 041-fix-aislamiento-evaluaciones-docente.sql
+│   │   ├── 042 — Endurecimiento-RLS-e- asistencias.sql
+│   │   ├── 043-pagos-insert-tutor-cambio-deEstado.sql
+│   │   ├── 044 — entregas_tareas.sql
+│   │   ├── 045-carnet-unico-por-ccolegio.sql
+│   │   ├── 046-inscripciones-tecnicas-inscrito-por.sql
+│   │   ├── 047-Corrige notas_insert_profesor.sql
+│   │   ├── 048-fix-select-actividades-tecnicas.sql
+│   │   ├── 049-fix-select-notas-tecnicas.sql
+│   │   ├── 050-fix-vista-notas-finales-tecnicas.sql
+│   │   ├── 051-fix-entregas-tareas-tecnicas.sql
+│   │   ├── 052-Theming-multitenant-index-dianmico.sql
+│   │   ├── 053-Vista-pública-para-selección-de-colegios.sql
+│   │   ├── 054-Aislamiento-multitenant-en-Storage.sql
+│   │   ├── 055-Bucket-Storagep-ara-logos.sql
+│   │   ├── 056 — buscar_estudiante_por_carnet.sql
+│   │   ├── 057-Plantilla-base-desacoplada-de-Buena-Fe.sql
+│   │   ├── 058-Plan-económico-por-colegio.sql
+│   │   ├── 059-Plan-económico — restricción-real.sql
+│   │   ├── 060-Plan-económico — gestión-pagos.sql
+│   │   ├── 061-Plan-avanzado-requerido-comunicados.sql
+│   │   ├── 062-Mecanismo-promoción-estudiantes.sql
+│   │   ├── 063-Historial-de-promociones.sql
+│   │   ├── 064-Validación-de-formato-formulario.sql
+│   │   ├── 065-Fix notas_insert_profesor.sql
+│   │   ├── 066-profesor_tiene_asignacion().sql
+│   │   ├── 067-Separar-asistencia-por-sesión.sql
+│   │   ├── 068-Políticas-RLS-JUntaTrimestral.sql
+│   │   ├── 069-Asistencia-separada-por-sesión-regular-técnica.sql
+│   │   ├── 070 — Bitácora-docente-diaria.sql
+│   │   ├── 071-trigger-set_updated-at-faltante-bitacora-docente.sql
+│   │   ├── 072-Bitácora-docente-impedir-fecha-futura.sql
+│   │   ├── 073-Finanzas-Pagos-suoerAdmin.sql
+│   │   └── 074-Rúbricas-de-calificación-Hacer -Saber.sql
+│   ├── supabase
+│   │   ├── .temp
+│   │   │   ├── cli-latest
+│   │   │   ├── gotrue-version
+│   │   │   ├── pooler-url
+│   │   │   ├── postgres-version
+│   │   │   ├── project-ref
+│   │   │   ├── rest-version
+│   │   │   ├── storage-migration
+│   │   │   └── storage-version
+│   │   ├── functions
+│   │   │   ├── crear-estudiantes-masivo
+│   │   │   │   ├── deno.json
+│   │   │   │   └── index.ts
+│   │   │   ├── crear-profesores-masivo
+│   │   │   │   └── index.ts
+│   │   │   └── reset-password
+│   │   │       └── index.ts
+│   │   └── config.toml
+│   └── README.md
+├── frontend
+│   ├── assets
+│   │   └── images
+│   ├── css
+│   │   ├── global.css
+│   │   └── theme-colors.css
+│   ├── js
+│   │   ├── admin
+│   │   │   ├── bitacora-director.js
+│   │   │   ├── carreras-tecnicas.js
+│   │   │   ├── credenciales-pdf.js
+│   │   │   ├── director.js
+│   │   │   ├── reportes-director.js
+│   │   │   └── superadmin.js
+│   │   ├── auth
+│   │   │   └── auth.js
+│   │   ├── comunicados
+│   │   │   ├── comunicados.js
+│   │   │   └── comunicados-ui.js
+│   │   ├── config
+│   │   │   ├── config-app.js
+│   │   │   ├── config-pagos.js
+│   │   │   └── supabase-config.js
+│   │   ├── estudiante
+│   │   │   └── estudiante.js
+│   │   ├── pagos
+│   │   │   ├── pagos.js
+│   │   │   └── reportes-pagos.js
+│   │   ├── profesor
+│   │   │   ├── bitacora.js
+│   │   │   ├── profesor.js
+│   │   │   └── vista-calificaciones.js
+│   │   ├── secretaria
+│   │   │   └── tutores.js
+│   │   └── utils
+│   │       ├── calculos.js
+│   │       ├── connection-status.js
+│   │       ├── data-layer.js
+│   │       ├── entrega-tareas.js
+│   │       ├── export-excel.js
+│   │       ├── generar-libreta-pdf.js
+│   │       ├── gestion-cierre.js
+│   │       ├── importar-estudiantes.js
+│   │       ├── informe-aprobados-reprobados.js
+│   │       ├── informe-bajo-rendimiento.js
+│   │       ├── informe-junta-trimestral.js
+│   │       ├── notificaciones.js
+│   │       ├── offline-db.js
+│   │       ├── promedio-anual.js
+│   │       ├── promocion-gestion.js
+│   │       ├── sanitize.js
+│   │       ├── tour.js
+│   │       ├── ui.js
+│   │       └── validaciones.js
+│   ├── public
+│   │   ├── icons
+│   │   │   ├── icon-192.png
+│   │   │   └── icon-512.png
+│   │   ├── manifest.json
+│   │   └── sw.js
+│   ├── supabase
+│   │   └── .temp
+│   │       └── linked-project.json
+│   ├── .env.example
+│   ├── .env.local
+│   ├── .gitignore
+│   ├── arbol 18 de agosto.txt
+│   ├── arbol-limpio.txt
+│   ├── dashboard-director.html
+│   ├── dashboard-estudiante.html
+│   ├── dashboard-profesor.html
+│   ├── dashboard-secretaria.html
+│   ├── dashboard-superadmin.html
+│   ├── dashboard-tutor.html
+│   ├── index.html
+│   ├── package.json
+│   ├── registro-tutor.html
+│   └── vite.config.js
+├── .gitignore
+├── arbol 18 de agosto.txt
+├── arbol.txt
+├── arbol-limpio.txt
+├── arbol-visualOFICIAL.txt
+├── cd
+├── estructura.txt
+├── estructura-carpetas.txt
+├── git
+├── informe-tecnico.md
+└── Readme.md

@@ -1,0 +1,21 @@
+/* Editor de tutoriales (superadmin). Todo bajo .mn / .mn-prev. */
+.mn .mn-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.mn .mn-top-r { display: flex; gap: 8px; }
+.mn .mn-top select { width: auto; min-width: 200px; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-text-primary, inherit); }
+.mn .card { margin-bottom: 16px; }
+.mn textarea, .mn select, .mn input[type=text], .mn input[type=url], .mn input[type=number] { width: 100%; box-sizing: border-box; }
+.mn-vacio { text-align: center; padding: 32px 12px; color: var(--color-text-secondary, #64748b); }
+.mn-acc { white-space: nowrap; }
+.mn-fila { display: grid; grid-template-columns: 2fr 1fr auto; gap: 8px; margin-bottom: 8px; }
+.mn-check { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.mn-ayuda { display: block; margin-top: 8px; color: var(--color-text-secondary, #64748b); }
+.mn-paso { border: 1px solid var(--color-border); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.mn-paso-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.mn-prev { position: fixed; inset: 0; z-index: 9000; background: rgba(15, 23, 42, .6); display: flex; align-items: stretch; justify-content: center; padding: 16px; }
+.mn-prev-box { background: var(--color-surface, #fff); color: var(--color-text, #0f172a); border-radius: 12px; width: min(1000px, 100%); display: flex; flex-direction: column; overflow: hidden; }
+.mn-prev-top { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 10px 14px; border-bottom: 1px solid var(--color-border); }
+.mn-prev-top label { display: flex; gap: 6px; align-items: center; font-size: 13px; }
+.mn-prev-top input[type=text] { padding: 5px 8px; }
+.mn-prev-cont { overflow: auto; padding: 16px; flex: 1; }
+@media (max-width: 640px) { .mn-fila { grid-template-columns: 1fr; } .mn-prev { padding: 0; } .mn-prev-box { border-radius: 0; } }
+.mn input[type=url] { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); color: inherit; font: inherit; }

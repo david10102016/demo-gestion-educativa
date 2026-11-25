@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Superadmin — Gestión Educativa</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/theme-colors.css">
+</head>
+<body>
+
+<div class="app-layout">
+  <div id="sidebar-overlay" class="sidebar-overlay"
+       onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('active')"></div>
+
+  <button id="btn-sidebar-toggle" class="btn-hamburger" title="Menú"
+          onclick="document.getElementById('sidebar').classList.add('open');document.getElementById('sidebar-overlay').classList.add('active')">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">Gestión Educativa</div>
+      <div class="sidebar-logo-sub">Panel Superadmin</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Administración</div>
+      <button class="nav-item active" data-section="colegios">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Colegios
+      </button>
+      <button class="nav-item" data-section="nuevo">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        Nuevo colegio
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar" id="avatar-superadmin">S</div>
+        <div>
+          <div class="sidebar-user-name" id="nombre-superadmin">Superadmin</div>
+          <div class="sidebar-user-role">Superadministrador</div>
+          <div class="sidebar-user-email" id="email-superadmin" style="font-size:11px;color:var(--color-text-3);margin-top:2px;"></div>
+        </div>
+      </div>
+      <button class="nav-item" id="btn-logout" style="margin-top:8px;">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Cerrar sesión
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="topbar-title" id="topbar-title">Colegios registrados</h1>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-ghost btn-icon" title="Cambiar tema" onclick="toggleTheme()">
+          <span id="theme-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- SECCIÓN: COLEGIOS -->
+      <section id="section-colegios" class="section-content">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;">
+          <div class="stat-card">
+            <div class="stat-card-value" id="stat-colegios">—</div>
+            <div class="stat-card-label">Total colegios</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-value" id="stat-activos">—</div>
+            <div class="stat-card-label">Colegios activos</div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0;">
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Colegio</th>
+                  <th>Municipio</th>
+                  <th>Departamento</th>
+                  <th>Estado</th>
+                  <th>Plan</th>
+                  <th>Finanzas</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-colegios">
+                <tr><td colspan="5" style="text-align:center;padding:32px;">Cargando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: NUEVO COLEGIO -->
+      <section id="section-nuevo" class="section-content hidden">
+        <div class="card" style="max-width:560px;">
+          <div class="card-title">Registrar nuevo colegio</div>
+          <div class="card-body">
+
+            <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--color-border);">
+              <div style="font-size:0.875rem;font-weight:600;margin-bottom:12px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;">Datos del colegio</div>
+              <div class="grid-2">
+                <div class="form-group"><label>Nombre *</label><input type="text" id="col-nombre" placeholder="Ej: U.E. Técnico Humanístico"></div>
+                <div class="form-group"><label>Sigla</label><input type="text" id="col-sigla" placeholder="Ej: UETH"></div>
+                <div class="form-group">
+                  <label>Dominio de correo *</label>
+                  <input type="text" id="col-dominio" placeholder="Ej: jap" maxlength="32" autocomplete="off">
+                  <small style="color:var(--color-text-secondary);">Los correos nuevos serán <em>iniciales@dominio.educativa.com</em>. No se repite entre colegios.</small>
+                </div>
+                <div class="form-group"><label>Municipio</label><input type="text" id="col-municipio" placeholder="Ej: Warnes"></div>
+                <div class="form-group"><label>Departamento</label><input type="text" id="col-departamento" placeholder="Ej: Santa Cruz"></div>
+                <div class="form-group">
+                  <label>Plan</label>
+                  <select id="col-plan">
+                    <option value="basico" selected>Básico</option>
+                    <option value="avanzado">Avanzado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:0.875rem;font-weight:600;margin-bottom:12px;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.05em;">Director del colegio</div>
+              <div class="grid-2">
+                <div class="form-group" style="grid-column:1/-1;"><label>Nombre completo *</label><input type="text" id="dir-nombre" placeholder="Ej: Juan Pérez Mamani"></div>
+                <div class="form-group"><label>Email *</label><input type="email" id="dir-email" placeholder="director@colegio.com"></div>
+                <div class="form-group"><label>Contraseña *</label><input type="password" id="dir-password" placeholder="Mín. 6 caracteres"></div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-full" style="margin-top:8px;" onclick="crearColegio()">
+              Crear colegio y director
+            </button>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script type="module" src="/js/admin/superadmin.js"></script>
+<script>
+(function(){
+  if(localStorage.getItem('theme')==='dark'){
+    document.documentElement.classList.add('dark');
+    const ic=document.getElementById('theme-icon');
+    if(ic)ic.textContent='☀️';
+  }
+})();
+
+// Navegación
+document.querySelectorAll('.nav-item[data-section]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.section-content').forEach(s => s.classList.add('hidden'))
+    document.querySelectorAll('.nav-item[data-section]').forEach(b => b.classList.remove('active'))
+    document.getElementById(`section-${btn.dataset.section}`)?.classList.remove('hidden')
+    btn.classList.add('active')
+    const titulos = { colegios: 'Colegios registrados', nuevo: 'Nuevo colegio' }
+    document.getElementById('topbar-title').textContent = titulos[btn.dataset.section] ?? ''
+  })
+})
+</script>
+<script type="module" src="/js/admin/superadmin.js"></script>
+<script type="module" src="/js/admin/manuales-admin.js"></script>
+<script type="module" src="/js/demo/admin-demos.js"></script>
+</body>
+</html>

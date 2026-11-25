@@ -1,0 +1,132 @@
+﻿├── .vite
+│   └── deps
+│       ├── package.json
+│       └── _metadata.json
+├── .vscode
+│   └── settings.json
+├── backend
+│   ├── migrations
+│   │   ├── 001_schema.sql
+│   │   ├── 002_configuraciones.sql
+│   │   ├── 003_rls.sql
+│   │   ├── 004_funciones.sql
+│   │   ├── 005_datos_iniciales.sql
+│   │   ├── 006_multitenant_rls.sql
+│   │   ├── 007_fix_notas_calificaciones_profesor.sql
+│   │   ├── 008_MIGRACIÓN FIX RLS USUARIOS.sql
+│   │   ├── 009_superadmin+fixcursos_materias.sql
+│   │   ├── 010 — VistaNotasFinales-Reportes.sql
+│   │   ├── 011-config-funcionalpara+colegios.sql
+│   │   ├── 012-notasFinalesVista-notasAisladasPorColegios.sql
+│   │   ├── 013-rpc copiar config colegio base.sql
+│   │   ├── 014-rpc_crear_director.sql
+│   │   ├── 015_proteccion_duplicados_cursos-configuracion_colegio.sql
+│   │   ├── 016-Activar-RLS-estudiantes.sql
+│   │   ├── 017-NotasNull-panelEstudiante.sql
+│   │   ├── 018-Modulo-comunicados.sql
+│   │   ├── 019 — RLS tutor_estudiante multitenant.sql
+│   │   ├── 020-seguridad-vinculacion-tutor.sql
+│   │   ├── 021-rol-tutor-en-comunicados-y-usuarios.sql
+│   │   ├── 022-fix-aislamiento-colegio.sql
+│   │   ├── 023-seguridad-rpc-funciones-publicas.sql
+│   │   ├── 024-seguridad-fichas-seguimiento-ser.sql
+│   │   ├── 025-cierra-INSERT-directoAtutor-estudiante.sql
+│   │   ├── 026 — Restringe el UPDATE-de-marcado-como-leído.sql
+│   │   ├── 027 — Bloquea-con-un-trigger-Comunicado.sql
+│   │   └── 028-proteger-colegio-tutor.sql
+│   ├── supabase
+│   │   ├── .temp
+│   │   │   ├── cli-latest
+│   │   │   ├── gotrue-version
+│   │   │   ├── pooler-url
+│   │   │   ├── postgres-version
+│   │   │   ├── project-ref
+│   │   │   ├── rest-version
+│   │   │   ├── storage-migration
+│   │   │   └── storage-version
+│   │   ├── functions
+│   │   │   ├── crear-estudiantes-masivo
+│   │   │   │   ├── deno.json
+│   │   │   │   └── index.ts
+│   │   │   ├── crear-profesores-masivo
+│   │   │   │   └── index.ts
+│   │   │   └── reset-password
+│   │   │       └── index.ts
+│   │   └── config.toml
+│   └── README.md
+├── frontend
+│   ├── assets
+│   │   └── images
+│   ├── css
+│   │   ├── global.css
+│   │   └── theme-colors.css
+│   ├── js
+│   │   ├── admin
+│   │   │   ├── carreras-tecnicas.js
+│   │   │   ├── credenciales-pdf.js
+│   │   │   ├── director.js
+│   │   │   ├── reportes-director.js
+│   │   │   └── superadmin.js
+│   │   ├── auth
+│   │   │   └── auth.js
+│   │   ├── comunicados
+│   │   │   ├── comunicados-ui.js
+│   │   │   └── comunicados.js
+│   │   ├── config
+│   │   │   ├── config-app.js
+│   │   │   ├── config-pagos.js
+│   │   │   └── supabase-config.js
+│   │   ├── estudiante
+│   │   │   └── estudiante.js
+│   │   ├── pagos
+│   │   │   ├── pagos.js
+│   │   │   └── reportes-pagos.js
+│   │   ├── profesor
+│   │   │   ├── profesor.js
+│   │   │   └── vista-calificaciones.js
+│   │   └── utils
+│   │       ├── calculos.js
+│   │       ├── connection-status.js
+│   │       ├── data-layer.js
+│   │       ├── entrega-tareas.js
+│   │       ├── export-excel.js
+│   │       ├── generar-libreta-pdf.js
+│   │       ├── gestion-cierre.js
+│   │       ├── importar-estudiantes.js
+│   │       ├── informe-aprobados-reprobados.js
+│   │       ├── informe-bajo-rendimiento.js
+│   │       ├── informe-junta-trimestral.js
+│   │       ├── notificaciones.js
+│   │       ├── offline-db.js
+│   │       ├── promedio-anual.js
+│   │       ├── tour.js
+│   │       └── ui.js
+│   ├── public
+│   │   ├── icons
+│   │   │   ├── icon-192.png
+│   │   │   └── icon-512.png
+│   │   ├── manifest.json
+│   │   └── sw.js
+│   ├── supabase
+│   │   └── .temp
+│   │       └── linked-project.json
+│   ├── .env.example
+│   ├── .env.local
+│   ├── dashboard-director.html
+│   ├── dashboard-estudiante.html
+│   ├── dashboard-profesor.html
+│   ├── dashboard-secretaria.html
+│   ├── dashboard-superadmin.html
+│   ├── dashboard-tutor.html
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── registro-tutor.html
+│   └── vite.config.js
+├── arbol-limpio.txt
+├── arbol-visual.txt
+├── arbol.txt
+├── estructura-carpetas.txt
+├── estructura.txt
+├── informe-tecnico.md
+└── Readme.md

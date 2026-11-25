@@ -1,0 +1,411 @@
+/* ─── STAT CARDS GRID RESPONSIVO ─────────────────────────────── */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 600px) {
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+/* ============================================================
+   theme-colors.css — Gestión Escolar 2027 
+   ============================================================
+   INSTRUCCIONES:
+   1. No modifica global.css en absoluto.
+   2. Enlazar en los tres HTML DESPUÉS del global.css:
+      <link rel="stylesheet" href="/css/theme-colors.css">
+   3. Para el toggle dark/light agregar en el topbar de cada
+      dashboard (director, profesor, estudiante):
+      <button id="btn-theme-toggle" class="btn btn-ghost btn-icon"
+        title="Cambiar tema" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+      </button>
+   4. Agregar este script antes del </body> en cada HTML:
+      <script>
+        (function() {
+          if (localStorage.getItem('theme') === 'dark') {
+            document.documentElement.classList.add('dark');
+            const ic = document.getElementById('theme-icon');
+            if (ic) ic.textContent = '☀️';
+          }
+        })();
+        function toggleTheme() {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          const ic = document.getElementById('theme-icon');
+          if (ic) ic.textContent = isDark ? '☀️' : '🌙';
+        }
+      </script>
+   ============================================================ */
+
+/* ─── VARIABLES DEL COLEGIO ─────────────────────────────── */
+:root {
+  /* Amarillo institucional U.E. Gloria */
+  --color-amarillo:        #eab308;
+  --color-amarillo-dark:   #a16207;
+  --color-amarillo-light:  #fef9c3;
+  --color-amarillo-mid:    #fef08a;
+  --color-amarillo-text:   #78350f;
+  --color-amarillo-shadow: rgba(234, 179, 8, 0.35);
+
+  /* Azul institucional (refuerzo sobre global.css) */
+  --color-azul-shadow:     rgba(79, 70, 229, 0.35);
+}
+
+/* ─── MODO OSCURO — variables ────────────────────────────── */
+html.dark {
+  --color-primary:       #6366f1;
+  --color-primary-dark:  #4f46e5;
+  --color-primary-light: #312e81;
+
+  --color-bg:            #0f172a;
+  --color-surface:       #1e293b;
+  --color-surface-2:     #263348;
+  --color-border:        #334155;
+  --color-border-strong: #475569;
+
+  --color-text:          #f1f5f9;
+  --color-text-2:        #94a3b8;
+  --color-text-3:        #64748b;
+
+  --color-success:       #10b981;
+  --color-success-bg:    #064e3b;
+  --color-error:         #f87171;
+  --color-error-bg:      #450a0a;
+  --color-warning:       #fbbf24;
+  --color-warning-bg:    #451a03;
+  --color-info:          #60a5fa;
+  --color-info-bg:       #1e3a5f;
+
+  --sidebar-bg:          #0f172a;
+  --sidebar-text:        #e2e8f0;
+  --sidebar-active:      rgba(255, 255, 255, 0.10);   /* respaldo; con color-mix toma el color del colegio (abajo) */
+  --sidebar-hover:       rgba(255, 255, 255, 0.06);
+  --sidebar-head:        var(--color-primary);        /* la cabecera conserva el color del colegio */
+  --sidebar-label:       #94a3b8;
+  --sidebar-line:        #1e293b;
+  --nav-chip-bg:         #1e293b;                      /* cajitas oscuras: no encandilan */
+  --nav-chip-filter:     brightness(1.35) saturate(1.1); /* íconos más brillantes, mismos colores */
+
+  --shadow-sm:  0 1px 2px 0 rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -4px rgba(0,0,0,0.4);
+
+  /* Amarillo en dark mode — más vivo para contrastar */
+  --color-amarillo:        #fbbf24;
+  --color-amarillo-dark:   #d97706;
+  --color-amarillo-light:  #1c1400;
+  --color-amarillo-mid:    #2d1f00;
+  --color-amarillo-text:   #fef3c7;
+  --color-amarillo-shadow: rgba(251, 191, 36, 0.3);
+}
+
+/* ─── DARK MODE — ajustes visuales globales ──────────────── */
+html.dark body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+html.dark .card,
+html.dark .modal-box,
+html.dark .stat-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+html.dark .topbar {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+html.dark thead th {
+  background: var(--color-surface-2);
+  color: var(--color-text-2);
+}
+
+html.dark tbody tr:hover {
+  background: var(--color-surface-2);
+}
+
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="password"],
+html.dark input[type="number"],
+html.dark input[type="date"],
+html.dark select,
+html.dark textarea {
+  background: var(--color-surface-2);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+html.dark .btn-secondary {
+  background: var(--color-surface-2);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-2);
+}
+html.dark .btn-secondary:hover:not(:disabled) {
+  background: var(--color-border);
+}
+
+html.dark .table-wrapper {
+  border-color: var(--color-border);
+}
+
+html.dark .badge-neutral {
+  background: var(--color-surface-2);
+  color: var(--color-text-2);
+}
+
+html.dark .act-card {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+html.dark .vc-table-wrap {
+  border-color: var(--color-border);
+}
+
+html.dark .modal-overlay {
+  background: rgba(2, 6, 23, 0.75);
+}
+
+/* Gradientes de tablas en dark mode */
+html.dark #resumen-notas-inicio thead th,
+html.dark .vc-thead-row,
+html.dark .sp-thead {
+  background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);
+}
+
+/* ─── BOTONES FLOTANTES — efecto hover ───────────────────── */
+/* Botón primario azul con sombra */
+.btn-primary {
+  box-shadow: 0 2px 8px var(--color-azul-shadow);
+  transition: background 0.15s, box-shadow 0.18s, transform 0.18s;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  box-shadow: 0 6px 18px var(--color-azul-shadow);
+  transform: translateY(-2px);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px var(--color-azul-shadow);
+}
+
+/* Botón secundario con hover elevado */
+.btn-secondary {
+  transition: background 0.15s, box-shadow 0.18s, transform 0.18s;
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-surface-2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+/* ─── BOTÓN AMARILLO — acciones de exportar/imprimir ─────── */
+.btn-amarillo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: var(--color-amarillo);
+  color: var(--color-amarillo-text);
+  box-shadow: 0 2px 8px var(--color-amarillo-shadow);
+  transition: background 0.15s, box-shadow 0.18s, transform 0.18s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.btn-amarillo:hover:not(:disabled) {
+  background: var(--color-amarillo-dark);
+  box-shadow: 0 6px 18px var(--color-amarillo-shadow);
+  transform: translateY(-2px);
+}
+.btn-amarillo:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px var(--color-amarillo-shadow);
+}
+.btn-amarillo:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-amarillo.btn-sm   { padding: 5px 12px; font-size: 12.5px; }
+
+/* Variante outline amarillo */
+.btn-amarillo-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--color-amarillo);
+  background: transparent;
+  color: var(--color-amarillo-text);
+  box-shadow: 0 2px 6px var(--color-amarillo-shadow);
+  transition: background 0.15s, box-shadow 0.18s, transform 0.18s;
+  white-space: nowrap;
+}
+.btn-amarillo-outline:hover:not(:disabled) {
+  background: var(--color-amarillo-light);
+  box-shadow: 0 6px 16px var(--color-amarillo-shadow);
+  transform: translateY(-2px);
+}
+.btn-amarillo-outline.btn-sm { padding: 5px 12px; font-size: 12.5px; }
+
+/* ─── BADGE AMARILLO — "En curso", "Trimestre activo" ─────── */
+.badge-amarillo {
+  background: var(--color-amarillo-light);
+  color: var(--color-amarillo-text);
+}
+
+html.dark .badge-amarillo {
+  background: var(--color-amarillo-mid);
+  color: var(--color-amarillo-text);
+}
+
+/* ─── CARDS CON EFECTO FLOTANTE ──────────────────────────── */
+.card {
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.stat-card {
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.stat-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* ─── CARD CON ACENTO AMARILLO (exportar/reportes) ────────── */
+/* Usar clase .card-amarillo en cards de exportación */
+.card-amarillo {
+  border-top: 3px solid var(--color-amarillo) !important;
+}
+
+/* ─── NAV ITEMS — hover con acento azul/amarillo ─────────── */
+.nav-item {
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.nav-item:hover {
+  box-shadow: inset 3px 0 0 var(--color-amarillo);
+}
+.nav-item.active {
+  box-shadow: none;
+}
+
+/* ─── TOGGLE TEMA — botón sol/luna en topbar ─────────────── */
+#btn-theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.15s, border-color 0.15s, transform 0.18s;
+  flex-shrink: 0;
+}
+#btn-theme-toggle:hover {
+  background: var(--color-amarillo-light);
+  border-color: var(--color-amarillo);
+  transform: rotate(15deg) scale(1.05);
+}
+
+html.dark #btn-theme-toggle {
+  background: var(--color-surface-2);
+  border-color: var(--color-border);
+}
+html.dark #btn-theme-toggle:hover {
+  background: var(--color-amarillo-mid);
+  border-color: var(--color-amarillo);
+}
+
+/* ─── ANIMACIÓN SUAVE AL CAMBIAR TEMA ────────────────────── */
+body,
+.card, .stat-card, .topbar, .sidebar,
+input, select, textarea, .btn, .badge,
+table, thead, tbody, .modal-box {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
+
+/* ─── FOCUS RING AMARILLO en inputs ──────────────────────── */
+/* Solo en contextos donde el usuario está en modo de exportar */
+.card-amarillo input:focus,
+.card-amarillo select:focus {
+  border-color: var(--color-amarillo);
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
+}
+
+/* ─── SCROLLBAR personalizada (Webkit) ───────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ─── RESPONSIVE — dark mode en móvil ───────────────────── */
+@media (max-width: 768px) {
+  html.dark .sidebar {
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+  }
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+/* Modo oscuro: recuadros con fondo claro fijo (estilos en línea del JS)
+   → texto oscuro para que se lea. Cubre #fff, #f8fafc, #fef3c7, white, etc. */
+html.dark [style*="background:#f"],
+html.dark [style*="background: #f"],
+html.dark [style*="background:white"],
+html.dark [style*="background: white"] {
+  color: #1e293b;
+}
+html.dark [style*="background:#f"] :is(h1,h2,h3,h4,h5,p,label,strong,small,td,th,li),
+html.dark [style*="background: #f"] :is(h1,h2,h3,h4,h5,p,label,strong,small,td,th,li),
+html.dark [style*="background:white"] :is(h1,h2,h3,h4,h5,p,label,strong,small,td,th,li),
+html.dark [style*="background: white"] :is(h1,h2,h3,h4,h5,p,label,strong,small,td,th,li) {
+  color: #1e293b;
+}
+
+/* ─── MENÚ EN MODO NOCTURNO: opción activa y cabecera con el color del colegio ─── */
+@supports (color: color-mix(in srgb, red, blue)) {
+  html.dark {
+    --sidebar-head:   color-mix(in srgb, var(--color-primary) 70%, #0f172a);
+    --sidebar-active: color-mix(in srgb, var(--color-primary) 35%, #0f172a);
+  }
+}
+html.dark .nav-item.active::before { background: var(--color-primary); }
+html.dark .nav-item.active { color: #fff; }

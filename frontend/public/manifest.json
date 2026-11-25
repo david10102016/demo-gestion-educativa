@@ -1,0 +1,13 @@
+{
+  "name": "U.E. Técnico Humanístico Buena Fe",
+  "short_name": "Buena Fe",
+  "description": "Sistema de Gestión Educativa - Warnes, Bolivia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020810",
+  "theme_color": "#4aa3df",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
