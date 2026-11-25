@@ -1,4 +1,4 @@
-const CACHE = 'buenafe-v14'
+const CACHE = 'buenafe-v15'
 
 // Se guardan respuestas completas (200) y las opacas de otros dominios (CDN sin crossorigin, status 0).
 // Las parciales (206: video/audio con Range) y las de error no se guardan: Cache.put() rechaza las 206.

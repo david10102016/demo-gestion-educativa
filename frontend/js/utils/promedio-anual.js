@@ -158,7 +158,7 @@ export async function renderizarPromedioAnual(containerId, estudianteId, materia
   }).join('')
 
   const headersTrimestres = periodos.map(p =>
-    `<th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">${p.nombre}</th>`
+    `<th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;background:transparent;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">${p.nombre}</th>`
   ).join('')
 
   el.innerHTML = `
@@ -175,7 +175,7 @@ export async function renderizarPromedioAnual(containerId, estudianteId, materia
       </div>
       <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;text-align:center;">
         <div style="font-size:11px;font-weight:600;color:var(--color-text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;">Materias</div>
-                ${enCurso === totalMaterias
+        ${enCurso === totalMaterias
           ? `<div style="font-size:22px;font-weight:800;color:#854d0e;">${totalMaterias} ${IC_CURSO}</div>
              <div style="font-size:11px;color:#854d0e;">en curso</div>`
           : `<div style="font-size:22px;font-weight:800;color:#065f46;">${aprobadas} ${IC_OK}</div>
@@ -189,10 +189,10 @@ export async function renderizarPromedioAnual(containerId, estudianteId, materia
       <table style="width:100%;border-collapse:collapse;font-size:13.5px;background:var(--color-surface);">
         <thead>
           <tr style="background:linear-gradient(135deg,#1e1b4b 0%,#4f46e5 100%);">
-            <th style="padding:12px 16px;text-align:left;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">Materia</th>
+            <th style="padding:12px 16px;text-align:left;font-size:11px;font-weight:600;background:transparent;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;">Materia</th>
             ${headersTrimestres}
-            <th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;">Promedio</th>
-            <th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;">Estado</th>
+            <th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;background:transparent;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;">Promedio</th>
+            <th style="padding:12px 16px;text-align:center;font-size:11px;font-weight:600;background:transparent;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;">Estado</th>
           </tr>
         </thead>
         <tbody>${filas}</tbody>
