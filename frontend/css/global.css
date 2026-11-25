@@ -1019,6 +1019,7 @@ textarea { resize: vertical; min-height: 80px; }
 .grid-2      { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
 .grid-3      { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-4); }
 .grid-4      { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--space-4); }
+@media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2,1fr); } }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .flex-between{ display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
 .flex-start  { display: flex; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: var(--space-3); }
